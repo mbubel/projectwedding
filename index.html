@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/foundation.css" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <title>Wedding Planner</title>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td>
+        <h1>Wedding Schedule</h1>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Erika and Nathan</h2>
+      </td>
+    </tr>
+  </table>
+
+  <!--Date-->
+  <table id="wedding-info-table">
+    <tr>
+      <td colspan="2"></td>
+      <td colspan="2">
+        <div class="input-group">
+          <input class="input-group-field" type="text" placeholder="Date" />
+          <div class="input-group-button">
+            <input type="submit" class="button tiny" value="Send" />
+          </div>
+        </div>
+      </td>
+      <td colspan="2"></td>
+    </tr>
+
+    <!-- Address Forms -->
+    <tr>
+      <td colspan="2">
+        <div class="input-group">
+          <input class="input-group-field" type="text" placeholder="Address1" />
+          <div class="input-group-button">
+            <input type="submit" class="button tiny" value="Send" />
+          </div>
+        </div>
+      </td>
+      <td colspan="2">
+        <div class="input-group">
+          <input class="input-group-field" type="text" placeholder="Address2" />
+          <div class="input-group-button">
+            <input type="submit" class="button tiny" value="Send" />
+          </div>
+        </div>
+      </td>
+      <td colspan="2">
+        <div class="input-group">
+          <input class="input-group-field" type="text" placeholder="Address3" />
+          <div class="input-group-button">
+            <input type="submit" class="button tiny" value="Send" />
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <!-- Basic Calendar Layout -->
+    <tr>
+      <th rowspan="2">08:00am</th>
+      <td colspan="4" rowspan="1" class="stage-saturn">WELCOME</td>
+    </tr>
+    <tr class="">
+      <td colspan="4" rowspan="1" class="stage-saturn"></td>
+    </tr>
+    <tr>
+      <th rowspan="2">08:30am</th>
+      <td colspan="4" rowspan="1" class="stage-saturn"></td>
+
+    </tr>
+    <tr class="">
+      <td colspan="4" rowspan="1"></td>
+    </tr>
+
+    <tr>
+      <th>09:00am</th>
+      <td colspan="4" rowspan="1" class="stage-earth" id="nineAm">
+        Speaker One <span>Earth Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>09:30am</th>
+      <td colspan="4" class="stage-earth" id="nine30Am">
+        Speaker Two <span>Earth Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>10:00am</th>
+      <td colspan="4" class="stage-earth" id="tenAm">
+        Speaker Three <span>Earth Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>10:30am</th>
+      <td colspan="4" class="stage-earth" id="ten30Am">
+        Speaker Four <span>Earth Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>11:00am</th>
+      <td rowspan="5" class="stage-mercury" id="elevenAm">
+        Speaker Five <span>Mercury Stage</span>
+      </td>
+      <td rowspan="5" class="stage-venus">
+        Speaker Six <span>Venus Stage</span>
+      </td>
+      <td rowspan="5" class="stage-mars">
+        Speaker Seven <span>Mars Stage</span>
+      </td>
+      <td rowspan="1" class="stage-saturn">Lunch</td>
+    </tr>
+    <tr>
+      <th>11:30am</th>
+    </tr>
+    <tr>
+      <th>12:00pm</th>
+      <td rowspan="3" class="stage-saturn">Break</td>
+    </tr>
+    <tr>
+      <th>12:30pm</th>
+    </tr>
+    <tr>
+      <th>1:00pm</th>
+    </tr>
+    <tr>
+      <th>1:30pm</th>
+      <td colspan="4" rowspan="2" class="stage-earth">
+        Speaker Eight <span>Earth Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>2:00pm</th>
+      <!-- Test to see API placement -->
+      <!-- <td colspan="2" rowspan="9" class="stage-saturn" id="travelApi">Travel API</td> -->
+    </tr>
+    <tr>
+      <th>2:30pm</th>
+      <td colspan="4" rowspan="8" class="stage-saturn">Break</td>
+    </tr>
+    <tr>
+      <th>3:00pm</th>
+    </tr>
+    <tr>
+      <th>3:30pm</th>
+    </tr>
+    <tr>
+      <th>4:00pm</th>
+    </tr>
+    <tr>
+      <th>4:30pm</th>
+    </tr>
+    <tr>
+      <th>5:00pm</th>
+    </tr>
+    <tr>
+      <th>5:30pm</th>
+    </tr>
+    <tr>
+      <th>6:00pm</th>
+    </tr>
+    <tr>
+      <th>6:30pm</th>
+      <td colspan="4" class="stage-earth">
+        Speaker Nine <span>Earth Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>7:00pm</th>
+      <td colspan="2" rowspan="2" class="stage-earth">
+        Speaker Ten <span>Earth Stage</span>
+      </td>
+      <td colspan="2" rowspan="2" class="stage-jupiter">
+        Speaker Eleven <span>Jupiter Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>7:30pm</th>
+    </tr>
+    <tr>
+      <th>8:00pm</th>
+      <td colspan="2" class="stage-mars">
+        Speaker Twelve <span>Mars Stage</span>
+      </td>
+      <td class="stage-jupiter">
+        Speaker Thirteen <span>Jupiter Stage</span>
+      </td>
+      <td class="stage-jupiter">
+        Speaker Fourteen <span>Jupiter Stage</span>
+      </td>
+    </tr>
+    <tr>
+      <th>8:30pm</th>
+      <td colspan="4" rowspan="4" class="stage-saturn">Drinks test</td>
+    </tr>
+    <tr>
+      <th>9:00pm</th>
+    </tr>
+    <tr>
+      <th>9:30pm</th>
+    </tr>
+    <tr>
+      <th>10:00pm</th>
+    </tr>
+    <tr>
+      <th>10:30pm</th>
+      <td colspan="4" rowspan="1" class="stage-mercury1">Drinks</td>
+    </tr>
+    <tr>
+      <th>11:00pm</th>
+    </tr>
+
+
+  </table>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -73,9 +73,22 @@ body {
   h2 {
     font-size: 200%;
     text-align: center;
+    padding: 10px;
+    margin: 1%;
   }
   
   .hide{
     display: none;
   }
-  
+
+  ::placeholder { 
+    color:  rgb(129, 127, 127);
+    opacity: 1;
+  }
+
+  #test-date {
+    color: rgb(129, 127, 127);
+  }
+  .center {
+    text-align:center;
+  }

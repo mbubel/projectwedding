@@ -1,0 +1,81 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 4rem 0;
+    font-family: -system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-image: url("https://cdn.clipart.email/15a9e4e1423c3c2bd135108abbd68816_floral-seamless-pattern-with-leaf-vector-neutral-pastel--thumbnail.png");
+  }
+  
+  table {
+    width: 100%;
+    max-width: 50rem;
+  }
+  
+  tr:nth-child(even) {
+    color: #ccc;
+    font-weight: normal;
+  }
+  
+  th,
+  td {
+    padding: 0.5rem 1rem;
+  }
+  
+  th {
+    font-weight: normal;
+    border-top: thin dotted #ccc;
+  }
+  
+  td {
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.4;
+    transition: opacity 0.3s ease;
+    color: black;
+  }
+  
+  td > span {
+    font-size: 0.8em;
+    font-weight: normal;
+    display: block;
+    width: 100%;
+  }
+  
+  .stage-earth {
+    background-color: #ffa726;
+  }
+  .stage-mercury1 {
+    background-color: #9ccc65;
+  }
+  .stage-venus {
+    background-color: #ff8a65;
+  }
+  .stage-mars {
+    background-color: #b3e5fc;
+  }
+  .stage-jupiter {
+    background-color: #81d4fa;
+  }
+  .stage-saturn {
+    background-color: #26c6da;
+  }
+  
+  h1 {
+    text-align: center;
+    background-color: #ff8a65;
+    padding: 10px;
+    margin: 1%;
+    
+  }
+  h2 {
+    font-size: 200%;
+    text-align: center;
+  }
+  
+  .hide{
+    display: none;
+  }
+  

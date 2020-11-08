@@ -14,6 +14,7 @@ $(document).ready(function () {
   var photoToRecEndDiv;
   var wedToPhotoTT;
   var photoToRecTT;
+  var tOrF = true;
 
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
@@ -110,6 +111,7 @@ $(document).ready(function () {
 
         // get the sunset time in UTC
         var time = responseSun.results.sunset;
+        console.log(time);
         // pull the hours, minutes, and am or pm from the string
         var hours = Number(time.match(/^(\d+)/)[1]);
         var minutes = Number(time.match(/:(\d+)/)[1]);
@@ -127,7 +129,7 @@ $(document).ready(function () {
         }
         console.log("hours" + hours + " minutes" + minutes);
         sunsetStartDiv = timeRound(minutes, hours - 1); // also the travel to the photo place end div
-        sunsetEndDiv = timeRound(minutes, hours);
+        sunsetEndDiv = timeRound(minutes, hours); // also the travel from the photo place start div
         console.log(sunsetStartDiv + " " + sunsetEndDiv);
 
         var sHours = hours.toString();
@@ -137,7 +139,7 @@ $(document).ready(function () {
         if (minutes < 10) sMinutes = "0" + sMinutes;
         // log the local military time of the sunset
         var sunsetTime = sHours + " " + sMinutes;
-        console.log(sunsetTime)
+        console.log(sunsetTime);
         console.log(sHours + sMinutes);
         // get travel time between wedding address and photo address
         wedToPhotoTT = calculateTravelTime(
@@ -150,21 +152,19 @@ $(document).ready(function () {
           receptionVenueAddress
         );
 
-        // console.log(!wedToPhotoTT);
-        // while(!wedToPhotoTT && !photoToRecTT){
-        //     // wait until these variable have values to move forward
-        // }
+        console.log(wedToPhotoTT);
+        console.log(calcStartTime(sunsetStartDiv, wedToPhotoTT));
+        //console.log(calcEndTime(sunsetStartDiv, photoToRecTT));
 
-        // call function to set the time div with the golden hour
-
-        // calcStartTime(sunsetStartDiv, wedToPhotoTT);
-        // calcEndTime(sunsetEndDiv, photoToRecTT);
+        // call function to set the time div with the golden hour, and travel times
       });
     });
   }
 
   // call api service
-  function calculateTravelTime(origin, destination) {
+  async function calculateTravelTime(origin, destination) {
+    var duration;
+    var durationTime;
     // call the distance matrix api service from google
     var service = new google.maps.DistanceMatrixService();
     service.getDistanceMatrix(
@@ -175,26 +175,24 @@ $(document).ready(function () {
         avoidHighways: false,
         avoidTolls: false,
       },
-      (response, status) => {
+      await function (response, status) {
         if (status !== "OK") {
           alert("Error was: " + status);
         } else {
-          console.log("get on with the else statement");
           var origin = response.originAddresses[0];
           var destination = response.destinationAddresses[0];
-          console.log(response.rows[0].elements[0].status);
           if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
             alert(
               "Better get on a plane. There are no roads between " +
                 origin +
                 " and " +
-                destination
+                destination+". Please re-enter the addresses, and try again"
             );
           } else {
             // get the travel time in minutes
-            var duration = response.rows[0].elements[0].duration;
+            duration = response.rows[0].elements[0].duration;
             console.log(duration);
-            var durationTime = duration.value;
+            durationTime = duration.value;
             console.log(durationTime);
           }
         }
@@ -207,6 +205,7 @@ $(document).ready(function () {
 
   // rounding time to the nearist 15 minutes
   function timeRound(minutes, hours) {
+    console.log("min: " + minutes + ", hrs: " + hours);
     var m = ((((minutes + 7.5) / 15) | 0) * 15) % 60;
     var h = (((minutes / 105 + 0.5) | 0) + hours) % 24;
     if (h < 10) h = "0" + h;
@@ -224,14 +223,19 @@ $(document).ready(function () {
     var endSeconds = Math.floor(endHour * 60 * 60 + endMin * 60);
     console.log(endHour + " " + endMin);
     console.log(endSeconds);
-    var startSeconds = endSeconds - duration;
+    console.log(duration);
+    var startSeconds = endSeconds - parseInt(duration);
+    console.log(startSeconds);
     var startHour = Math.floor(startSeconds / 3600);
+    console.log(typeof startHour);
+    console.log(startHour);
     var startMin = Math.floor((startSeconds % 3600) / 60);
-    startTime = timeRound(startMin, startHour);
-    return startTime;
+    // console.log(typeof startMin);
+    timeRound(startMin, startHour);
+    return;
   }
 
-  function calcStartTime(startTime, duration) {
+  function calcEndTime(startTime, duration) {
     var endHour = parseInt(startTime.substring(0, 2));
     var endMin = parseInt(startTime.substring(3));
     var endSeconds = Math.floor(endHour * 60 * 60 + endMin * 60);

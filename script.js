@@ -130,7 +130,7 @@ $(document).ready(function () {
         console.log("hours" + hours + " minutes" + minutes);
         sunsetStartDiv = timeRound(minutes, hours - 1); // also the travel to the photo place end div
         sunsetEndDiv = timeRound(minutes, hours); // also the travel from the photo place start div
-        console.log(sunsetStartDiv + " " + sunsetEndDiv);
+        console.log("Golden Hour Starts at: " +sunsetStartDiv + ", and Golden Hour Ends at:  " + sunsetEndDiv);
 
         var sHours = hours.toString();
         var sMinutes = minutes.toString();
@@ -138,74 +138,57 @@ $(document).ready(function () {
         if (hours < 10) sHours = "0" + sHours;
         if (minutes < 10) sMinutes = "0" + sMinutes;
         // log the local military time of the sunset
-        var sunsetTime = sHours + " " + sMinutes;
-        console.log(sunsetTime);
-        console.log(sHours + sMinutes);
+        var sunsetTime = sHours + ":" + sMinutes;
+        console.log("Actual Sunset Time: "+sunsetTime);
+        
         // get travel time between wedding address and photo address
-        wedToPhotoTT = calculateTravelTime(
-          weddingVenueAddress,
-          photoVenueAddress
+        // call the distance matrix api service from google
+        var service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix(
+          {
+            origins: [weddingVenueAddress, photoVenueAddress],
+            destinations: [photoVenueAddress, receptionVenueAddress],
+            travelMode: google.maps.TravelMode.DRIVING,
+            avoidHighways: false,
+            avoidTolls: false,
+          },
+          function (response, status) {
+            if (status !== "OK") {
+              alert("Error was: " + status);
+            } else {
+              var origin = response.originAddresses[0];
+              var destination = response.destinationAddresses[0];
+              if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+                alert(
+                  "Better get on a plane. There are no roads between " +
+                    origin +
+                    " and " +
+                    destination +
+                    ". Please re-enter the addresses, and try again"
+                );
+              } else {
+                // get the travel time in minutes
+                wedToPhotoTT = response.rows[0].elements[0].duration.value;
+                photoToRecTT = response.rows[1].elements[0].duration.value;
+
+                console.log("Leave the wedding venue at: "+calcStartTime(sunsetStartDiv, wedToPhotoTT));
+                console.log("Arrive at the Reception venue at: "+calcEndTime(sunsetStartDiv, photoToRecTT));
+
+
+                // call function to set the time div with the golden hour, and travel times
+              }
+            }
+          }
         );
-
-        photoToRecTT = calculateTravelTime(
-          photoVenueAddress,
-          receptionVenueAddress
-        );
-
-        console.log(wedToPhotoTT);
-        console.log(calcStartTime(sunsetStartDiv, wedToPhotoTT));
-        //console.log(calcEndTime(sunsetStartDiv, photoToRecTT));
-
-        // call function to set the time div with the golden hour, and travel times
       });
     });
-  }
-
-  // call api service
-  async function calculateTravelTime(origin, destination) {
-    var duration;
-    var durationTime;
-    // call the distance matrix api service from google
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-      {
-        origins: [origin],
-        destinations: [destination],
-        travelMode: google.maps.TravelMode.DRIVING,
-        avoidHighways: false,
-        avoidTolls: false,
-      },
-      await function (response, status) {
-        if (status !== "OK") {
-          alert("Error was: " + status);
-        } else {
-          var origin = response.originAddresses[0];
-          var destination = response.destinationAddresses[0];
-          if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
-            alert(
-              "Better get on a plane. There are no roads between " +
-                origin +
-                " and " +
-                destination+". Please re-enter the addresses, and try again"
-            );
-          } else {
-            // get the travel time in minutes
-            duration = response.rows[0].elements[0].duration;
-            console.log(duration);
-            durationTime = duration.value;
-            console.log(durationTime);
-          }
-        }
-      }
-    );
-    return durationTime;
   }
 
   // function to set the time blocks on the web page using the travel time and the golden hour
 
   // rounding time to the nearist 15 minutes
   function timeRound(minutes, hours) {
-    console.log("min: " + minutes + ", hrs: " + hours);
+    // console.log("min: " + minutes + ", hrs: " + hours);
     var m = ((((minutes + 7.5) / 15) | 0) * 15) % 60;
     var h = (((minutes / 105 + 0.5) | 0) + hours) % 24;
     if (h < 10) h = "0" + h;
@@ -221,30 +204,30 @@ $(document).ready(function () {
     var endHour = parseInt(endTime.substring(0, 2));
     var endMin = parseInt(endTime.substring(3));
     var endSeconds = Math.floor(endHour * 60 * 60 + endMin * 60);
-    console.log(endHour + " " + endMin);
-    console.log(endSeconds);
-    console.log(duration);
+    // console.log(endHour + " " + endMin);
+    // console.log(endSeconds);
+    // console.log(duration);
     var startSeconds = endSeconds - parseInt(duration);
-    console.log(startSeconds);
+    // console.log(startSeconds);
     var startHour = Math.floor(startSeconds / 3600);
-    console.log(typeof startHour);
-    console.log(startHour);
+    // console.log(typeof startHour);
+    // console.log(startHour);
     var startMin = Math.floor((startSeconds % 3600) / 60);
     // console.log(typeof startMin);
-    timeRound(startMin, startHour);
-    return;
+    startTime = timeRound(startMin, startHour);
+    return startTime;
   }
 
   function calcEndTime(startTime, duration) {
     var endHour = parseInt(startTime.substring(0, 2));
     var endMin = parseInt(startTime.substring(3));
     var endSeconds = Math.floor(endHour * 60 * 60 + endMin * 60);
-    console.log(endHour + " " + endMin);
-    console.log(endSeconds);
+    // console.log(endHour + " " + endMin);
+    // console.log(endSeconds);
     var startSeconds = endSeconds + duration;
     var startHour = Math.floor(startSeconds / 3600);
     var startMin = Math.floor((startSeconds % 3600) / 60);
-    startTime = timeRound(startMin, startHour);
-    return startTime;
+    endTime = timeRound(startMin, startHour);
+    return endTime;
   }
 });

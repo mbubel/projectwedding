@@ -27,6 +27,7 @@ body {
   th {
     font-weight: normal;
     border-top: thin dotted #ccc;
+    color: black;
   }
   
   td {

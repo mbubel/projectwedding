@@ -17,6 +17,9 @@ $(document).ready(function () {
   var photoToRecTT;
   var photoToRecVal;
 
+  console.log(moment("20:15","h:mm a").format("HH:MM"))
+
+
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
   var weddingVenue = new google.maps.places.Autocomplete(weddingAddressField);
@@ -219,6 +222,15 @@ $(document).ready(function () {
                   column.textContent = divArray[i].text;
                   console.log(divArray[i]);
                 }
+
+                // Moment JS stuff
+                sunsetEndDiv = moment(sunsetEndDiv, "h:mm a");
+                sunsetStartDiv = moment(sunsetStartDiv, "h:mm a")
+                console.log("SunsetEnd "+sunsetEndDiv);
+                console.log("SunsetStart "+sunsetStartDiv);
+
+                sunsetStartDiv = sunsetStartDiv.add(1,"hour").format("hh:mm");
+                console.log(sunsetStartDiv);
               }
             }
           }

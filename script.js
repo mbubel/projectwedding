@@ -17,7 +17,6 @@ $(document).ready(function () {
   var photoToRecTT;
   var photoToRecVal;
 
-
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
   var weddingVenue = new google.maps.places.Autocomplete(weddingAddressField);
@@ -33,7 +32,6 @@ $(document).ready(function () {
     gMapsWeddingVenue = weddingVenue.getPlace();
     // get the wedding address to get travel time
     weddingVenueAddress = gMapsWeddingVenue.formatted_address;
-
   });
   google.maps.event.addListener(photoVenue, "place_changed", function () {
     gMapsPhotoVenue = photoVenue.getPlace();
@@ -46,7 +44,6 @@ $(document).ready(function () {
       var addressType = photoAddressArray[i].types[0];
       if (addressType == "locality") {
         photoCity = photoAddressArray[i].short_name;
-
       }
     }
   });
@@ -54,13 +51,11 @@ $(document).ready(function () {
     gMapsReceptionVenue = receptionVenue.getPlace();
     // get the reception address to get the travel time
     receptionVenueAddress = gMapsReceptionVenue.formatted_address;
-
   });
 
   // when form is submitted use addresses to get the travel time between each one
   $("#wedding-info-submit").on("click", function (e) {
     e.preventDefault();
-
 
     // get the date of the wedding from the form input wiht the id wedding-date
     dateInput = $("#wedding-date").val();
@@ -112,7 +107,7 @@ $(document).ready(function () {
         if (AMPM == "PM" && hours < 12) hours = hours + 12;
         if (AMPM == "AM" && hours == 12) hours = hours - 12;
 
-        hours += timeOffset
+        hours += timeOffset;
 
         // if hours less than 0 after adding the time offset value then add 24 to the hours to get it into military time.
         if (hours < 0) {
@@ -129,8 +124,7 @@ $(document).ready(function () {
         if (minutes < 10) sMinutes = "0" + sMinutes;
         // log the local military time of the sunset
         var sunsetTime = sHours + ":" + sMinutes;
-        
-        
+
         // get travel time between wedding address and photo address
         // call the distance matrix api service from google
         var service = new google.maps.DistanceMatrixService();
@@ -162,29 +156,73 @@ $(document).ready(function () {
                 wedToPhotoVal = response.rows[0].elements[0].duration.text;
                 photoToRecTT = response.rows[0].elements[1].duration.value;
                 photoToRecVal = response.rows[0].elements[1].duration.text;
-                console.log("Wed to Photo: "+wedToPhotoVal);
-                console.log("Photo to Reception: "+photoToRecVal)
-                
-                wedToPhotoEndDiv = timeRound(minutes-15, hours - 1);
-                wedToPhotoStartDiv = calcStartTime(wedToPhotoEndDiv, wedToPhotoTT);
-                photoToRecStartDiv = timeRound(minutes+15,hours);
-                photoToRecEndDiv = calcEndTime(photoToRecStartDiv, photoToRecTT);
+                console.log("Wed to Photo: " + wedToPhotoVal);
+                console.log("Photo to Reception: " + photoToRecVal);
 
-                console.log("Leave the wedding venue at: "+wedToPhotoStartDiv);
-                console.log("Arrive at the Photo Venue at: "+wedToPhotoEndDiv);
-                console.log("Golden Hour Starts at: "+sunsetStartDiv);
-                console.log("Golden Hour Ends at: "+sunsetEndDiv);
-                console.log("Actual Sunset Time: "+sunsetTime);
+                wedToPhotoEndDiv = timeRound(minutes - 15, hours - 1);
+                wedToPhotoStartDiv = calcStartTime(
+                  wedToPhotoEndDiv,
+                  wedToPhotoTT
+                );
+                photoToRecStartDiv = timeRound(minutes + 15, hours);
+                photoToRecEndDiv = calcEndTime(
+                  photoToRecStartDiv,
+                  photoToRecTT
+                );
+
+                console.log(
+                  "Leave the wedding venue at: " + wedToPhotoStartDiv
+                );
+                console.log(
+                  "Arrive at the Photo Venue at: " + wedToPhotoEndDiv
+                );
+                console.log("Golden Hour Starts at: " + sunsetStartDiv);
+                console.log("Golden Hour Ends at: " + sunsetEndDiv);
+                console.log("Actual Sunset Time: " + sunsetTime);
                 console.log("Leave the photo venue at: " + photoToRecStartDiv);
-                console.log("Arrive at the Reception venue at: "+photoToRecEndDiv);
+                console.log(
+                  "Arrive at the Reception venue at: " + photoToRecEndDiv
+                );
 
+                // var test = document.getElementById("15:00");
+                // test.textContent="test";
+                var divArray = [
+                  {
+                    id: wedToPhotoStartDiv,
+                    text: "Leave the wedding venue at: " + wedToPhotoStartDiv,
+                  },
+                  {
+                    id: wedToPhotoEndDiv,
+                    text: "Arrive at the Photo Venue at: " + wedToPhotoEndDiv,
+                  },
+                  {
+                    id: sunsetStartDiv,
+                    text: "Golden Hour Starts at: " + sunsetStartDiv,
+                  },
+                  {
+                    id: sunsetEndDiv,
+                    text: "Golden Hour Ends at: " + sunsetEndDiv,
+                  },
+                  {
+                    id: photoToRecStartDiv,
+                    text: "Leave the photo venue at: " + photoToRecStartDiv,
+                  },
+                  {
+                    id: photoToRecEndDiv,
+                    text:
+                      "Arrive at the Reception venue at: " + photoToRecEndDiv,
+                  },
+                ];
 
-                // call function to set the time div with the golden hour, and travel times
+                for (var i = 0; i < divArray.length; i++) {
+                  var column = document.getElementById(divArray[i].id);
+                  column.textContent = divArray[i].text;
+                  console.log(divArray[i]);
+                }
               }
             }
           }
         );
-
       });
     });
   }

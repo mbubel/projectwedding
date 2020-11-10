@@ -11,7 +11,9 @@ body {
 
 table {
   width: 100%;
-  max-width: 50rem;
+  max-width: 60rem;
+  /* padding: 10px; */
+  box-shadow: 5px 10px 8px #888888;
 }
 
 tr:nth-child(odd) {
@@ -59,7 +61,7 @@ td > span {
   background-color: #ff8a65;
 }
 .stage-mars {
-  background-color: #b3e5fc;
+  background-color: #b2e2c9;
 }
 .stage-jupiter {
   background-color: #81d4fa;
@@ -68,17 +70,29 @@ td > span {
   background-color: #26c6da;
 }
 
-h1 {
+h1 {font-family: 'Playball', cursive;
+  font-size: 390%;
+  /* font-family: 'Lobster', cursive; */
   text-align: center;
-  background-color: #ff8a65;
   padding: 10px;
   margin: 1%;
 }
-h2 {
-  font-size: 200%;
+h2 {font-family: 'Playball', cursive;
+  font-size: 230%;
   text-align: center;
-  padding: 10px;
+  background-color: rgb(238, 232, 234);
   margin: 1%;
+  opacity: 0.8;
+}
+
+.input { margin-bottom: 10px;
+  background-color: #c0cbbe;
+}
+
+.header {
+  box-shadow: 5px 10px 20px rgb(175, 59, 59) inset;
+  opacity: 0.8;
+  background-color: #e4a08f;
 }
 
 .hide {

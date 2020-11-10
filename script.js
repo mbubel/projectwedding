@@ -153,7 +153,7 @@ $(document).ready(function () {
         // console.log(!wedToPhotoTT);
         // while(!wedToPhotoTT && !photoToRecTT){
         //     // wait until these variable have values to move forward
-        // }
+        // }z
 
         // call function to set the time div with the golden hour
 

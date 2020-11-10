@@ -187,11 +187,43 @@ $(document).ready(function () {
                   "Arrive at the Reception venue at: " + photoToRecEndDiv
                 );
 
-                // call function to set the time div with the golden hour, and travel times
+                // var test = document.getElementById("15:00");
+                // test.textContent="test";
+                var divArray = [
+                  {
+                    id: wedToPhotoStartDiv,
+                    text: "Leave the wedding venue at: " + wedToPhotoStartDiv,
+                  },
+                  {
+                    id: wedToPhotoEndDiv,
+                    text: "Arrive at the Photo Venue at: " + wedToPhotoEndDiv,
+                  },
+                  {
+                    id: sunsetStartDiv,
+                    text: "Golden Hour Starts at: " + sunsetStartDiv,
+                  },
+                  {
+                    id: sunsetEndDiv,
+                    text: "Golden Hour Ends at: " + sunsetEndDiv,
+                  },
+                  {
+                    id: photoToRecStartDiv,
+                    text: "Leave the photo venue at: " + photoToRecStartDiv,
+                  },
+                  {
+                    id: photoToRecEndDiv,
+                    text:
+                      "Arrive at the Reception venue at: " + photoToRecEndDiv,
+                  },
+                ];
 
+                for (var i = 0; i < divArray.length; i++) {
+                  var column = document.getElementById(divArray[i].id);
+                  column.textContent = divArray[i].text;
+                  console.log(divArray[i]);
+                }
 
-                
-                
+                // Moment JS stuff
                 sunsetEndDiv = moment(sunsetEndDiv, "h:mm a");
                 sunsetStartDiv = moment(sunsetStartDiv, "h:mm a")
                 console.log("SunsetEnd "+sunsetEndDiv);
@@ -199,11 +231,6 @@ $(document).ready(function () {
 
                 sunsetStartDiv = sunsetStartDiv.add(1,"hour").format("hh:mm");
                 console.log(sunsetStartDiv);
-
-                // while(sunsetStartDiv != sunsetEndDiv){
-                //   sunsetStartDiv = sunsetStartDiv.add(15,'minutes');
-                // }
-
               }
             }
           }

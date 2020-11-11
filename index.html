@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/foundation.css" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 
     <title>Wedding Planner</title>
@@ -12,21 +13,21 @@
 
   <body>
     <table>
-      <tr>
+      <tr class="header">
         <td>
-          <h1>Wedding Schedule</h1>
+          <h1> Wedding Schedule </h1>
         </td>
       </tr>
       <tr>
         <td>
-          <h2>Erika and Nathan</h2>
+         <h2><img src="left4.png">  Erika and Nathan   <img src="right4.png"></h2>
         </td>
       </tr>
     </table>
 
     <!-- Address Forms -->
     <table>
-      <tr>
+      <tr class="input">
         <td colspan="2">
           <div>
             <input
@@ -35,9 +36,6 @@
               type="text"
               placeholder="Ceremony Address"
             />
-            <!-- <div class="input-group-button">
-            <input type="submit" class="button tiny" value="Send" />
-          </div> -->
           </div>
         </td>
         <td colspan="2">
@@ -59,9 +57,6 @@
               placeholder="Reception Address"
               id="reception-address"
             />
-            <!-- <div class="input-group-button">
-            <input type="submit" class="button tiny" value="Send" />
-          </div> -->
           </div>
         </td>
       </tr>
@@ -70,14 +65,14 @@
         <td colspan="2"></td>
         <td colspan="2">
           <div class="input-group">
-            <input class="input-group-field" id="wedding-date" type="date" />
+          <input class="input-group-field" id="wedding-date" type="date" title="Enter the date" />
           </div>
           <!-- Submit Button -->
           <div class="center">
             <input
               type="submit"
-              class="button small"
-              value="Submit"
+              class="hollow button expanded"
+              value="SUBMIT"
               id="wedding-info-submit"
             />
           </div>
@@ -88,286 +83,200 @@
     <!-- Schedule Beginning -->
     <table id="schedule">
       <tr>
-        <th rowspan="1" class="time">8:00am</th>
-        <td id="08:00"></td>
-        <td></td>
-        <td></td>
+        <th width="200" rowspan="1" class="time">8:00am</th>
+        <th id="08:00" width="1000"></th>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="08:15"  class="stage-mars"></td>
-        <td class="stage-mars"></td>
-        <td class="stage-mars"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">8:30am</th>
-        <td id="08:30" class="stage-mars">this is a test</td>
-        <td class="stage-mars">this is a test</td>
-        <td class="stage-mars">this is a test</td>
+        <td id="08:30" class="stage-mars">This is a one big sentence. This is a one big sentence. This is a one big sentence. This is a one big sentence.</td>
         
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="08:45" class="stage-mars"></td>
-        <td class="stage-mars"></td>
-        <td class="stage-mars"></td>
-      </tr>
+           </tr>
       <tr>
         <th rowspan="1" class="time">9:00am</th>
         <td id="09:00"></td>
-        <td>This is a test</td>
-        <td>This is a test</td>
-      </tr>
+           </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="09:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">9:30am</th>
         <td id="09:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="09:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time">10:00am</th>
         <td id="10:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="10:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">10:30am</th>
         <td id="10:30"></td>
-        <td></td>
-        <td></td>
-      </tr>
+     </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="10:45"></td>
-        <td></td>
-        <td></td>
-      </tr>
+     </tr>
       <tr>
         <th rowspan="1" class="time">11:00am</th>
         <td id="11:00"></td>
-        <td></td>
-        <td></td>
-      </tr>
+     </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="11:15"></td>
-        <td></td>
-        <td></td>
-      </tr>
+     </tr>
       <tr>
         <th rowspan="1" class="time">11:30am</th>
         <td id="11:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="11:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">12:00pm</th>
         <td id="12:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="12:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">12:30pm</th>
         <td id="12:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="12:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">1:00pm</th>
         <td id="13:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="13:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">1:30pm</th>
         <td id="13:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="13:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">2:00pm</th>
         <td id="14:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="14:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">2:30pm</th>
         <td id="14:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="14:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">3:00pm</th>
         <td id="15:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="15:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">3:30pm</th>
         <td id="15:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="15:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
 
         <th rowspan="1" class="time" >4:00pm</th>
         <td id="16:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time" ></th>
         <td id="16:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">4:30pm</th>
         <td  id="16:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td  id="16:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">5:00pm</th>
         <td  id="17:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="17:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">5:30pm</th>
         <td id="17:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="17:45" class="stage-earth"></td>
-        <td class="stage-earth"></td>
-        <td class="stage-earth"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">6:00pm</th>
         <td id="18:00"  class="stage-earth">this is a test</td>
-        <td class="stage-earth"></td>
-        <td class="stage-earth"></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="18:15" class="stage-earth"></td>
-        <td class="stage-earth"></td>
-        <td class="stage-earth"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">6:30pm</th>
         <td id="18:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
@@ -379,34 +288,24 @@
       <tr>
         <th rowspan="1" class="time">7:00pm</th>
         <td id="19:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="19:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">7:30pm</th>
         <td id="19:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="19:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">8:00pm</th>
         <td id="20:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
@@ -418,93 +317,65 @@
       <tr>
         <th rowspan="1" class="time">8:30pm</th>
         <td id="20:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="20:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">9:00pm</th>
         <td id="21:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="21:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">9:30pm</th>
         <td id="21:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="21:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">10:00pm</th>
         <td id="22:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="22:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">10:30pm</th>
         <td id="22:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="22:45"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">11:00pm</th>
         <td id="23:00"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="23:15"></td>
-        <td></td>
-        <td></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">11:30pm</th>
         <td id="23:30"></td>
-        <td></td>
-        <td></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="23:45"></td>
-        <td></td>
-        <td></td>
       </tr>
     </table>
     <!-- Schedule End -->

@@ -123,7 +123,7 @@ $(document).ready(function () {
 
         // get the sunset time in UTC
         var time = responseSun.results.sunset;
-        console.log(time);
+
         // pull the hours, minutes, and am or pm from the string
         var hours = Number(time.match(/^(\d+)/)[1]);
         var minutes = Number(time.match(/:(\d+)/)[1]);
@@ -178,10 +178,8 @@ $(document).ready(function () {
                 // get the travel time in minutes
                 wedToPhotoTT = response.rows[0].elements[0].duration.value;
                 wedToPhotoVal = response.rows[0].elements[0].duration.text;
-                photoToRecTT = response.rows[0].elements[1].duration.value;
-                photoToRecVal = response.rows[0].elements[1].duration.text;
-                console.log("Wed to Photo: " + wedToPhotoVal);
-                console.log("Photo to Reception: " + photoToRecVal);
+                photoToRecTT = response.rows[1].elements[1].duration.value;
+                photoToRecVal = response.rows[1].elements[1].duration.text;
 
                 wedToPhotoEndDiv = timeRound(minutes - 15, hours - 1);
                 wedToPhotoStartDiv = calcStartTime(
@@ -194,22 +192,6 @@ $(document).ready(function () {
                   photoToRecTT
                 );
 
-                console.log(
-                  "Leave the wedding venue at: " + wedToPhotoStartDiv
-                );
-                console.log(
-                  "Arrive at the Photo Venue at: " + wedToPhotoEndDiv
-                );
-                console.log("Golden Hour Starts at: " + sunsetStartDiv);
-                console.log("Golden Hour Ends at: " + sunsetEndDiv);
-                console.log("Actual Sunset Time: " + sunsetTime);
-                console.log("Leave the photo venue at: " + photoToRecStartDiv);
-                console.log(
-                  "Arrive at the Reception venue at: " + photoToRecEndDiv
-                );
-
-                // var test = document.getElementById("15:00");
-                // test.textContent="test";
                 var divArray = [
                   {
                     id: wedToPhotoStartDiv,
@@ -277,7 +259,6 @@ $(document).ready(function () {
                     "class",
                     calendarColors[divArray[i].colorIndex]
                   );
-                  console.log(divArray[i]);
                 }
 
                 colorDivs(wedToPhotoStartDiv, wedToPhotoEndDiv);
@@ -290,8 +271,6 @@ $(document).ready(function () {
       });
     });
   }
-
-  // function to set the time blocks on the web page using the travel time and the golden hour
 
   // rounding time to the nearist 15 minutes
   function timeRound(minutes, hours) {

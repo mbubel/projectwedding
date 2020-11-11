@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/foundation.css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playball&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
 
     <title>Wedding Planner</title>
@@ -15,18 +18,35 @@
     <table>
       <tr class="header">
         <td>
-          <h1> Wedding Schedule </h1>
+          <h1>Wedding Schedule</h1>
         </td>
       </tr>
-      <tr>
+      <tr id="nearly-wed-row">
         <td>
-         <h2><img src="assets/left4.png">  Erika and Nathan   <img src="assets/right4.png"></h2>
+          <div class="input-group">
+            <input
+              class="input-group-field"
+              id="nearlywed-names"
+              type="text"
+              placeholder="Nearlywed Names"
+            />
+          </div>
+        </td>
+
+      </tr>
+      <tr class="hide" id="header-info">
+        <td>
+          <h2 id="nearly-wed">
+            <img src="assets/left4.png" /> Erika and Nathan
+            <img src="assets/right4.png" />
+          </h2>
+          <h3 id="displayed-wed-date"></h3>
         </td>
       </tr>
     </table>
 
     <!-- Address Forms -->
-    <table>
+    <table id="submit-form">
       <tr class="input">
         <td colspan="2">
           <div>
@@ -65,7 +85,12 @@
         <td colspan="2"></td>
         <td colspan="2">
           <div class="input-group">
-          <input class="input-group-field" id="wedding-date" type="date" title="Enter the date" />
+            <input
+              class="input-group-field"
+              id="wedding-date"
+              type="date"
+              title="Enter the date"
+            />
           </div>
           <!-- Submit Button -->
           <div class="center">
@@ -80,6 +105,26 @@
         <td colspan="2"></td>
       </tr>
     </table>
+
+    <table id="change-address" class="hide">
+      <tr>
+        <td colspan="2"></td>
+        <td colspan="2">
+          <!-- Submit Button -->
+          <div class="center">
+            <button
+              class="hollow button expanded"
+              value="SUBMIT"
+              id="wedding-info-submit"
+            >
+              Change Addresses
+            </button>
+          </div>
+        </td>
+        <td colspan="2"></td>
+      </tr>
+    </table>
+
     <!-- Schedule Beginning -->
     <table id="schedule">
       <tr>
@@ -89,22 +134,21 @@
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
-        <td id="08:15"  class="stage-mars"></td>
+        <td id="08:15"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">8:30am</th>
-        <td id="08:30" class="stage-mars">This is a one big sentence. This is a one big sentence. This is a one big sentence. This is a one big sentence.</td>
-        
+        <td id="08:30"></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
-        <td id="08:45" class="stage-mars"></td>
-           </tr>
+        <td id="08:45"></td>
+      </tr>
       <tr>
         <th rowspan="1" class="time">9:00am</th>
         <td id="09:00"></td>
-           </tr>
+      </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
@@ -132,21 +176,21 @@
       <tr>
         <th rowspan="1" class="time">10:30am</th>
         <td id="10:30"></td>
-     </tr>
+      </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="10:45"></td>
-     </tr>
+      </tr>
       <tr>
         <th rowspan="1" class="time">11:00am</th>
         <td id="11:00"></td>
-     </tr>
+      </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
         <td id="11:15"></td>
-     </tr>
+      </tr>
       <tr>
         <th rowspan="1" class="time">11:30am</th>
         <td id="11:30"></td>
@@ -229,27 +273,26 @@
         <td id="15:45"></td>
       </tr>
       <tr>
-
-        <th rowspan="1" class="time" >4:00pm</th>
+        <th rowspan="1" class="time">4:00pm</th>
         <td id="16:00"></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
-        <th rowspan="1" class="time" ></th>
+        <th rowspan="1" class="time"></th>
         <td id="16:15"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">4:30pm</th>
-        <td  id="16:30"></td>
+        <td id="16:30"></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
-        <td  id="16:45"></td>
+        <td id="16:45"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">5:00pm</th>
-        <td  id="17:00"></td>
+        <td id="17:00"></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
@@ -263,16 +306,16 @@
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
-        <td id="17:45" class="stage-earth"></td>
+        <td id="17:45"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">6:00pm</th>
-        <td id="18:00"  class="stage-earth">this is a test</td>
+        <td id="18:00"></td>
       </tr>
       <!-- 15 minute time block -->
       <tr>
         <th rowspan="1" class="time"></th>
-        <td id="18:15" class="stage-earth"></td>
+        <td id="18:15"></td>
       </tr>
       <tr>
         <th rowspan="1" class="time">6:30pm</th>

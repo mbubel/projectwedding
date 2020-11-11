@@ -17,8 +17,8 @@ $(document).ready(function () {
   var photoToRecTT;
   var photoToRecVal;
 
-  console.log(moment("20:15","h:mm a").format("HH:MM"))
-
+  var calendarColors = ["drive1", "goldhour", "drive2"];
+  var calendarColorIndex = 0;
 
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
@@ -56,13 +56,34 @@ $(document).ready(function () {
     receptionVenueAddress = gMapsReceptionVenue.formatted_address;
   });
 
+  $("#change-address").on("click", function () {
+    // $("#submit-form").removeClass("hide");
+    // $("#change-address").attr("class","hide");
+    // previous comments will just reverse the class changes back to what they are on page load.
+    location.reload();
+  });
   // when form is submitted use addresses to get the travel time between each one
   $("#wedding-info-submit").on("click", function (e) {
     e.preventDefault();
 
     // get the date of the wedding from the form input wiht the id wedding-date
     dateInput = $("#wedding-date").val();
+    $("#displayed-wed-date").text(
+      moment(dateInput, "YYYY-MM-DD").format("MMMM Do YYYY")
+    );
 
+    $("#submit-form").attr("class", "hide");
+    $("#change-address").removeClass("hide");
+
+    var nearlyWedNames = $("#nearlywed-names").val();
+    $("#nearly-wed").html(
+      "<img src='assets/left4.png' /> " +
+        nearlyWedNames +
+        " <img src='assets/right4.png' />"
+    );
+
+    $("#nearly-wed-row").attr("class", "hide");
+    $("#header-info").removeClass("hide");
     // get golden hour time
     goldenHourCalc(photoCity, dateInput);
   });
@@ -192,45 +213,76 @@ $(document).ready(function () {
                 var divArray = [
                   {
                     id: wedToPhotoStartDiv,
-                    text: "Leave the wedding venue at: " + wedToPhotoStartDiv,
+                    text:
+                      "LEAVE " +
+                      weddingVenueAddress +
+                      " at: " +
+                      moment(wedToPhotoStartDiv, "HH:mm").format("h:mm a") +
+                      ". Estimated Travel time is: " +
+                      wedToPhotoVal +
+                      ".",
+                    colorIndex: 0,
                   },
                   {
                     id: wedToPhotoEndDiv,
-                    text: "Arrive at the Photo Venue at: " + wedToPhotoEndDiv,
+                    text:
+                      "ARRIVE at " +
+                      photoVenueAddress +
+                      " at: " +
+                      moment(wedToPhotoEndDiv, "HH:mm").format("h:mm a") +
+                      ".",
+                    colorIndex: 0,
                   },
                   {
                     id: sunsetStartDiv,
-                    text: "Golden Hour Starts at: " + sunsetStartDiv,
+                    text:
+                      "GOLDEN HOUR Starts at: " +
+                      moment(sunsetStartDiv, "HH:mm").format("h:mm a"),
+                    colorIndex: 1,
                   },
                   {
                     id: sunsetEndDiv,
-                    text: "Golden Hour Ends at: " + sunsetEndDiv,
+                    text:
+                      "GOLDEN HOUR Ends at: " +
+                      moment(sunsetEndDiv, "HH:mm").format("h:mm a") +
+                      ". Actual sunset time is " +
+                      moment(sunsetTime, "HH:mm").format("h:mm a")+".",
+                    colorIndex: 1,
                   },
                   {
                     id: photoToRecStartDiv,
-                    text: "Leave the photo venue at: " + photoToRecStartDiv,
+                    text:
+                      "LEAVE " +
+                      photoVenueAddress +
+                      " at: " +
+                      moment(photoToRecStartDiv, "HH:mm").format("h:mm a") +
+                      ". Estimated Travel time is: " +
+                      photoToRecVal +
+                      ".",
+                    colorIndex: 2,
                   },
                   {
                     id: photoToRecEndDiv,
                     text:
-                      "Arrive at the Reception venue at: " + photoToRecEndDiv,
+                      "ARRIVE at "+receptionVenueAddress+" at: " +
+                      moment(photoToRecEndDiv, "HH:mm").format("h:mm a")+".",
+                    colorIndex: 2,
                   },
                 ];
 
                 for (var i = 0; i < divArray.length; i++) {
                   var column = document.getElementById(divArray[i].id);
                   column.textContent = divArray[i].text;
+                  column.setAttribute(
+                    "class",
+                    calendarColors[divArray[i].colorIndex]
+                  );
                   console.log(divArray[i]);
                 }
 
-                // Moment JS stuff
-                sunsetEndDiv = moment(sunsetEndDiv, "h:mm a");
-                sunsetStartDiv = moment(sunsetStartDiv, "h:mm a")
-                console.log("SunsetEnd "+sunsetEndDiv);
-                console.log("SunsetStart "+sunsetStartDiv);
-
-                sunsetStartDiv = sunsetStartDiv.add(1,"hour").format("hh:mm");
-                console.log(sunsetStartDiv);
+                colorDivs(wedToPhotoStartDiv, wedToPhotoEndDiv);
+                colorDivs(sunsetStartDiv, sunsetEndDiv);
+                colorDivs(photoToRecStartDiv, photoToRecEndDiv);
               }
             }
           }
@@ -274,5 +326,18 @@ $(document).ready(function () {
     var endMin = Math.floor((endSeconds % 3600) / 60);
     endTime = timeRound(endMin, endHour);
     return endTime;
+  }
+
+  // call this function with the start time and end time in military time HH:MM
+  function colorDivs(startTime, endTime) {
+    while (startTime != endTime) {
+      startTime = moment(startTime, "HH:mm");
+      startTime = startTime.add(15, "minutes").format("HH:mm");
+      if (startTime != endTime) {
+        var col = document.getElementById(startTime);
+        col.setAttribute("class", calendarColors[calendarColorIndex]);
+      }
+    }
+    calendarColorIndex++;
   }
 });

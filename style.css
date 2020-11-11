@@ -84,13 +84,19 @@ h2 {font-family: 'Playball', cursive;
   margin: 1%;
   opacity: 0.8;
 }
+h3 {font-family: 'Playball', cursive;
+  font-size: 180%;
+  text-align: center;
+  background-color: rgb(238, 232, 234);
+  margin: 1%;
+  opacity: 0.8;
+}
 
 .input { margin-bottom: 10px;
   background-color: #c0cbbe;
 }
 
 .header {
-  box-shadow: 5px 10px 20px rgb(175, 59, 59) inset;
   opacity: 0.8;
   background-color: #e4a08f;
 }
@@ -129,4 +135,14 @@ table {
 .fifteenblock {
   font-size: 9px;
   
+}
+
+.drive1 {
+  background-color: #E4B5A9;
+}
+.goldhour {
+  background-color: #f2ba69;
+}
+.drive2 {
+  background-color: #B28B8C;
 }

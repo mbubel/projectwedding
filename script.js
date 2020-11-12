@@ -32,6 +32,31 @@ $(document).ready(function () {
   var calendarColors = ["drive1", "goldhour", "drive2"];
   var calendarColorIndex;
 
+  //  if names and date are stored in local storage, then display in the header
+  if (nearlyWedNames !== null && dateInputDisplay !== null) {
+    // Set the h2 and h3 text with the nearlyWedNames, and dateInputDisplay. These are pulled form local storage
+    $("#nearly-wed").html(nearlyWedNames);
+    $("#displayed-wed-date").text(dateInputDisplay);
+    $("#nearly-wed-row").attr("class", "hide");
+    $("#header-info").removeClass("hide");
+  }
+
+  // date is stored display date in from fields
+  if (dateInput !== null) {
+    $("#wedding-date").val(dateInput);
+  }
+
+  // if address are stored display previous addresses searched in from fields
+  if (
+    weddingVenueAddress !== null &&
+    photoVenueAddress !== null &&
+    receptionVenueAddress !== null
+  ) {
+    weddingAddressField.value = weddingVenueAddress;
+    photoAddressField.value = photoVenueAddress;
+    receptionAddressField.value = receptionVenueAddress;
+  }
+
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
   var weddingVenue = new google.maps.places.Autocomplete(weddingAddressField);
@@ -92,11 +117,10 @@ $(document).ready(function () {
   });
 
   $("#change-names").on("click", function () {
-    $("#nearlywed-names").val(names);
     $("#submit-form").removeClass("hide");
-    $("#change-table").attr("class","hide");
-    $("#nearly-wed-row").removeClass("hide")
-    $("#header-info").attr("class","hide");
+    $("#change-table").attr("class", "hide");
+    $("#nearly-wed-row").removeClass("hide");
+    $("#header-info").attr("class", "hide");
   });
 
   // when form is submitted use addresses to get the travel time between each one
@@ -117,7 +141,7 @@ $(document).ready(function () {
     $("#change-table").removeClass("hide");
 
     // get nearly wed names, and add the html to the h2 with the ide nearly-wed
-    names = $("#nearlywed-names").val()
+    names = $("#nearlywed-names").val();
     nearlyWedNames =
       "<img src='assets/left4.png' /> " +
       names +
@@ -225,7 +249,7 @@ $(document).ready(function () {
                     ". Please re-enter the addresses, and try again"
                 );
               } else {
-                // get the travel time in minutes for wed to photo
+                // get the travel time in minutes for weding to photo, and from photo to reception
                 wedToPhotoTT = response.rows[0].elements[0].duration.value;
                 wedToPhotoVal = response.rows[0].elements[0].duration.text;
                 photoToRecTT = response.rows[1].elements[1].duration.value;
@@ -374,33 +398,5 @@ $(document).ready(function () {
       }
     }
     calendarColorIndex++;
-  }
-
-  // sets nearlywed names to local strage
-  $("#wedding-info-submit").on("click", function () {});
-
-  //  if names and date are stored in local storage, then display in the header
-  console.log(nearlyWedNames);
-  console.log(dateInputDisplay);
-  if (nearlyWedNames !== null && dateInputDisplay !== null) {
-    // Set the h2 and h3 text with the nearlyWedNames, and dateInputDisplay. These are pulled form local storage
-    $("#nearly-wed").html(nearlyWedNames);
-    $("#displayed-wed-date").text(dateInputDisplay);
-    $("#nearly-wed-row").attr("class", "hide");
-    $("#header-info").removeClass("hide");
-  }
-
-  if (dateInput !== null) {
-    $("#wedding-date").val(dateInput);
-  }
-
-  if (
-    weddingVenueAddress !== null &&
-    photoVenueAddress !== null &&
-    receptionVenueAddress !== null
-  ) {
-    weddingAddressField.value = weddingVenueAddress;
-    photoAddressField.value = photoVenueAddress;
-    receptionAddressField.value = receptionVenueAddress;
   }
 });

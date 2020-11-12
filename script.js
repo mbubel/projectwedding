@@ -330,13 +330,14 @@ $(document).ready(function () {
     calendarColorIndex++;
   }
 
-  
+  // sets nearlywed names to local strage
   $("#wedding-info-submit").on('click', function() {
   var input = document.getElementById("nearlywed-names").value;
   console.log(input);
   localStorage.setItem('names',input);
 });
 
+//  our attempt to get names on screen after reloading the page
 window.onload = function() {
   var name = localStorage.getItem("names");
   if (name !== null) $('#h1').val("names");

@@ -17,14 +17,16 @@
   <body>
     <table>
       <tr class="header">
-        <td>
+        <td id="h1" >
           <h1>Wedding Schedule</h1>
         </td>
       </tr>
       <tr id="nearly-wed-row">
         <td>
+          <!-- names -->
           <div class="input-group">
             <input
+              name="names"
               class="input-group-field"
               id="nearlywed-names"
               type="text"
@@ -118,7 +120,7 @@
     </table>
 
     <!-- Schedule Beginning -->
-    <table id="schedule">
+    <table id="schedule" name="names">
       <tr>
         <th width="200" rowspan="1" class="time">8:00am</th>
         <th id="08:00" width="800"></th>

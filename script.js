@@ -66,6 +66,12 @@ $(document).ready(function () {
   $("#wedding-info-submit").on("click", function (e) {
     e.preventDefault();
 
+    // setting nearlywed names to local storage
+
+  //  var input = document.getElementById('nearlywed-names').value;
+  // localStorage.setItem('names', input);
+
+
     // get the date of the wedding from the form input wiht the id wedding-date
     dateInput = $("#wedding-date").val();
     $("#displayed-wed-date").text(
@@ -228,7 +234,8 @@ $(document).ready(function () {
                       "GOLDEN HOUR Ends at: " +
                       moment(sunsetEndDiv, "HH:mm").format("h:mm a") +
                       ". Actual sunset time is " +
-                      moment(sunsetTime, "HH:mm").format("h:mm a")+".",
+                      moment(sunsetTime, "HH:mm").format("h:mm a") +
+                      ".",
                     colorIndex: 1,
                   },
                   {
@@ -246,8 +253,11 @@ $(document).ready(function () {
                   {
                     id: photoToRecEndDiv,
                     text:
-                      "ARRIVE at "+receptionVenueAddress+" at: " +
-                      moment(photoToRecEndDiv, "HH:mm").format("h:mm a")+".",
+                      "ARRIVE at " +
+                      receptionVenueAddress +
+                      " at: " +
+                      moment(photoToRecEndDiv, "HH:mm").format("h:mm a") +
+                      ".",
                     colorIndex: 2,
                   },
                 ];
@@ -319,4 +329,33 @@ $(document).ready(function () {
     }
     calendarColorIndex++;
   }
+
+  
+  $("#wedding-info-submit").on('click', function() {
+  var input = document.getElementById("nearlywed-names").value;
+  console.log(input);
+  localStorage.setItem('names',input);
+});
+
+window.onload = function() {
+  var name = localStorage.getItem("names");
+  if (name !== null) $('#h1').val("names");
+
+ document.getElementById("nearly-wed").value = localStorage.getItem('names');
+
+// $("#wedding-info-submit").on('click', function() {
+//   var input = document.getElementById("nearly-wed").value;
+//   console.log(input);
+//   localStorage.setItem('names',input);
+// });
+
+// window.onload = function() {
+//   var name = localStorage.getItem("names");
+//   // if (name !== null) $('#h1').val("names");
+  
+//  document.getElementById("nearly-wed").value = localStorage.getItem('names');
+
+};
+
+
 });

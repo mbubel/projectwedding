@@ -39,23 +39,12 @@ $(document).ready(function () {
     $("#displayed-wed-date").text(dateInputDisplay);
     $("#nearly-wed-row").attr("class", "hide");
     $("#header-info").removeClass("hide");
-  }
+  };
 
   // date is stored display date in from fields
   if (dateInput !== null) {
     $("#wedding-date").val(dateInput);
-  }
-
-  // if address are stored display previous addresses searched in from fields
-  if (
-    weddingVenueAddress !== null &&
-    photoVenueAddress !== null &&
-    receptionVenueAddress !== null
-  ) {
-    weddingAddressField.value = weddingVenueAddress;
-    photoAddressField.value = photoVenueAddress;
-    receptionAddressField.value = receptionVenueAddress;
-  }
+  };
 
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
@@ -66,6 +55,17 @@ $(document).ready(function () {
   var receptionVenue = new google.maps.places.Autocomplete(
     receptionAddressField
   );
+
+  // if address are stored display previous addresses searched in from fields
+  if (
+    weddingVenueAddress !== null &&
+    photoVenueAddress !== null &&
+    receptionVenueAddress !== null
+  ) {
+    weddingAddressField.value = weddingVenueAddress;
+    photoAddressField.value = photoVenueAddress;
+    receptionAddressField.value = receptionVenueAddress;
+  };
 
   // event listeners to store the value of the address once selected by the user
   google.maps.event.addListener(weddingVenue, "place_changed", function () {

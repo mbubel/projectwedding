@@ -39,12 +39,12 @@ $(document).ready(function () {
     $("#displayed-wed-date").text(dateInputDisplay);
     $("#nearly-wed-row").attr("class", "hide");
     $("#header-info").removeClass("hide");
-  };
+  }
 
   // date is stored display date in from fields
   if (dateInput !== null) {
     $("#wedding-date").val(dateInput);
-  };
+  }
 
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
@@ -65,10 +65,11 @@ $(document).ready(function () {
     weddingAddressField.value = weddingVenueAddress;
     photoAddressField.value = photoVenueAddress;
     receptionAddressField.value = receptionVenueAddress;
-  };
+  }
 
   // event listeners to store the value of the address once selected by the user
   google.maps.event.addListener(weddingVenue, "place_changed", function () {
+    // weddingAddressField.style.borderColor = "green"
     gMapsWeddingVenue = weddingVenue.getPlace();
     // get the wedding address to get travel time
     weddingVenueAddress = gMapsWeddingVenue.formatted_address;
@@ -119,6 +120,10 @@ $(document).ready(function () {
   $("#change-names").on("click", function () {
     $("#submit-form").removeClass("hide");
     $("#change-table").attr("class", "hide");
+
+    $("#address-row").attr("class","hide");
+    $("#wedding-date").attr("class","hide");
+
     $("#nearly-wed-row").removeClass("hide");
     $("#header-info").attr("class", "hide");
   });
@@ -147,7 +152,6 @@ $(document).ready(function () {
       names +
       " <img src='assets/right4.png' />";
     // if the value entered is null then do not set the HTML
-    console.log(names);
     if (names !== "") {
       $("#nearly-wed").html(nearlyWedNames);
       // Store the nearly wed names into local storage

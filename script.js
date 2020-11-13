@@ -1,11 +1,17 @@
 $(document).ready(function () {
   var gMapsWeddingVenue;
-  var weddingVenueAddress;
+  var weddingVenueAddress = JSON.parse(
+    localStorage.getItem("googleWedAddress")
+  );
   var gMapsPhotoVenue;
-  var photoVenueAddress;
-  var photoCity;
+  var photoVenueAddress = JSON.parse(
+    localStorage.getItem("googlePhotoAddress")
+  );
+  var photoCity = localStorage.getItem("city");
   var gMapsReceptionVenue;
-  var receptionVenueAddress;
+  var receptionVenueAddress = JSON.parse(
+    localStorage.getItem("googleRecAddress")
+  );
   var sunsetStartDiv;
   var sunsetEndDiv;
   var wedToPhotoStartDiv;
@@ -16,9 +22,29 @@ $(document).ready(function () {
   var wedToPhotoVal;
   var photoToRecTT;
   var photoToRecVal;
+  // grab nearlyWedNames from local storage. Value is null if not stored
+  var nearlyWedNames = localStorage.getItem("names");
+  var names;
+  // grab displayed date from local storage. Value is null if not stored
+  var dateInputDisplay = localStorage.getItem("dateInputDisplay");
+  var dateInput = localStorage.getItem("dateInputAPI");
 
   var calendarColors = ["drive1", "goldhour", "drive2"];
-  var calendarColorIndex = 0;
+  var calendarColorIndex;
+
+  //  if names and date are stored in local storage, then display in the header
+  if (nearlyWedNames !== null && dateInputDisplay !== null) {
+    // Set the h2 and h3 text with the nearlyWedNames, and dateInputDisplay. These are pulled form local storage
+    $("#nearly-wed").html(nearlyWedNames);
+    $("#displayed-wed-date").text(dateInputDisplay);
+    $("#nearly-wed-row").attr("class", "hide");
+    $("#header-info").removeClass("hide");
+  }
+
+  // date is stored display date in from fields
+  if (dateInput !== null) {
+    $("#wedding-date").val(dateInput);
+  }
 
   // Set google maps autofill for searching for addresses
   var weddingAddressField = document.getElementById("wedding-address");
@@ -30,16 +56,38 @@ $(document).ready(function () {
     receptionAddressField
   );
 
+  // if address are stored display previous addresses searched in from fields
+  if (
+    weddingVenueAddress !== null &&
+    photoVenueAddress !== null &&
+    receptionVenueAddress !== null
+  ) {
+    weddingAddressField.value = weddingVenueAddress;
+    photoAddressField.value = photoVenueAddress;
+    receptionAddressField.value = receptionVenueAddress;
+  }
+
   // event listeners to store the value of the address once selected by the user
   google.maps.event.addListener(weddingVenue, "place_changed", function () {
+    // weddingAddressField.style.borderColor = "green"
     gMapsWeddingVenue = weddingVenue.getPlace();
     // get the wedding address to get travel time
     weddingVenueAddress = gMapsWeddingVenue.formatted_address;
+    // store the address
+    localStorage.setItem(
+      "googleWedAddress",
+      JSON.stringify(weddingVenueAddress)
+    );
   });
   google.maps.event.addListener(photoVenue, "place_changed", function () {
     gMapsPhotoVenue = photoVenue.getPlace();
     // get the photo address to get the travel time
     photoVenueAddress = gMapsPhotoVenue.formatted_address;
+    // store the photo address
+    localStorage.setItem(
+      "googlePhotoAddress",
+      JSON.stringify(photoVenueAddress)
+    );
 
     // get the photo city because that is where golden hour is happening!
     var photoAddressArray = gMapsPhotoVenue.address_components;
@@ -47,6 +95,7 @@ $(document).ready(function () {
       var addressType = photoAddressArray[i].types[0];
       if (addressType == "locality") {
         photoCity = photoAddressArray[i].short_name;
+        localStorage.setItem("city", photoCity);
       }
     }
   });
@@ -54,6 +103,11 @@ $(document).ready(function () {
     gMapsReceptionVenue = receptionVenue.getPlace();
     // get the reception address to get the travel time
     receptionVenueAddress = gMapsReceptionVenue.formatted_address;
+    // store the reception address
+    localStorage.setItem(
+      "googleRecAddress",
+      JSON.stringify(receptionVenueAddress)
+    );
   });
 
   $("#change-address").on("click", function () {
@@ -62,29 +116,53 @@ $(document).ready(function () {
     // previous comments will just reverse the class changes back to what they are on page load.
     location.reload();
   });
+
+  $("#change-names").on("click", function () {
+    $("#submit-form").removeClass("hide");
+    $("#change-table").attr("class", "hide");
+
+    $("#address-row").attr("class","hide");
+    $("#wedding-date").attr("class","hide");
+
+    $("#nearly-wed-row").removeClass("hide");
+    $("#header-info").attr("class", "hide");
+  });
+
   // when form is submitted use addresses to get the travel time between each one
   $("#wedding-info-submit").on("click", function (e) {
     e.preventDefault();
+    calendarColorIndex = 0;
 
     // get the date of the wedding from the form input wiht the id wedding-date
     dateInput = $("#wedding-date").val();
-    $("#displayed-wed-date").text(
-      moment(dateInput, "YYYY-MM-DD").format("MMMM Do YYYY")
-    );
+    dateInputDisplay = moment(dateInput, "YYYY-MM-DD").format("MMMM Do YYYY");
+    $("#displayed-wed-date").text(dateInputDisplay);
+
+    // store date input for api calls and date input for display purposes
+    localStorage.setItem("dateInputDisplay", dateInputDisplay);
+    localStorage.setItem("dateInputAPI", dateInput);
 
     $("#submit-form").attr("class", "hide");
-    $("#change-address").removeClass("hide");
+    $("#change-table").removeClass("hide");
 
-    var nearlyWedNames = $("#nearlywed-names").val();
-    $("#nearly-wed").html(
+    // get nearly wed names, and add the html to the h2 with the ide nearly-wed
+    names = $("#nearlywed-names").val();
+    nearlyWedNames =
       "<img src='assets/left4.png' /> " +
-        nearlyWedNames +
-        " <img src='assets/right4.png' />"
-    );
+      names +
+      " <img src='assets/right4.png' />";
+    // if the value entered is null then do not set the HTML
+    if (names !== "") {
+      $("#nearly-wed").html(nearlyWedNames);
+      // Store the nearly wed names into local storage
+      localStorage.setItem("names", nearlyWedNames);
+    }
 
+    // change the classes on the nearly-wed-row to be hidden, and the header-info to no longer be hidden
     $("#nearly-wed-row").attr("class", "hide");
     $("#header-info").removeClass("hide");
-    // get golden hour time
+
+    // get golden hour time, and display the travel times on the webpage
     goldenHourCalc(photoCity, dateInput);
   });
 
@@ -138,15 +216,15 @@ $(document).ready(function () {
           hours += 24;
         }
 
-        sunsetStartDiv = timeRound(minutes, hours - 1); // also the travel to the photo place end div
-        sunsetEndDiv = timeRound(minutes, hours); // also the travel from the photo place start div
+        sunsetStartDiv = timeRound(minutes, hours - 1);
+        sunsetEndDiv = timeRound(minutes, hours);
 
         var sHours = hours.toString();
         var sMinutes = minutes.toString();
         // add leading 0 to numbers less than 10
         if (hours < 10) sHours = "0" + sHours;
         if (minutes < 10) sMinutes = "0" + sMinutes;
-        // log the local military time of the sunset
+        // set the local military time of the sunset
         var sunsetTime = sHours + ":" + sMinutes;
 
         // get travel time between wedding address and photo address
@@ -175,12 +253,13 @@ $(document).ready(function () {
                     ". Please re-enter the addresses, and try again"
                 );
               } else {
-                // get the travel time in minutes
+                // get the travel time in minutes for weding to photo, and from photo to reception
                 wedToPhotoTT = response.rows[0].elements[0].duration.value;
                 wedToPhotoVal = response.rows[0].elements[0].duration.text;
                 photoToRecTT = response.rows[1].elements[1].duration.value;
                 photoToRecVal = response.rows[1].elements[1].duration.text;
 
+                // round the travel time to the nearist 15 minutes to be able to use the ids on the page
                 wedToPhotoEndDiv = timeRound(minutes - 15, hours - 1);
                 wedToPhotoStartDiv = calcStartTime(
                   wedToPhotoEndDiv,
@@ -192,6 +271,7 @@ $(document).ready(function () {
                   photoToRecTT
                 );
 
+                // Array of information displayed on the screen.
                 var divArray = [
                   {
                     id: wedToPhotoStartDiv,
@@ -228,7 +308,8 @@ $(document).ready(function () {
                       "GOLDEN HOUR Ends at: " +
                       moment(sunsetEndDiv, "HH:mm").format("h:mm a") +
                       ". Actual sunset time is " +
-                      moment(sunsetTime, "HH:mm").format("h:mm a")+".",
+                      moment(sunsetTime, "HH:mm").format("h:mm a") +
+                      ".",
                     colorIndex: 1,
                   },
                   {
@@ -246,8 +327,11 @@ $(document).ready(function () {
                   {
                     id: photoToRecEndDiv,
                     text:
-                      "ARRIVE at "+receptionVenueAddress+" at: " +
-                      moment(photoToRecEndDiv, "HH:mm").format("h:mm a")+".",
+                      "ARRIVE at " +
+                      receptionVenueAddress +
+                      " at: " +
+                      moment(photoToRecEndDiv, "HH:mm").format("h:mm a") +
+                      ".",
                     colorIndex: 2,
                   },
                 ];
@@ -261,6 +345,7 @@ $(document).ready(function () {
                   );
                 }
 
+                // Set the colors for all the rows between the start and end times
                 colorDivs(wedToPhotoStartDiv, wedToPhotoEndDiv);
                 colorDivs(sunsetStartDiv, sunsetEndDiv);
                 colorDivs(photoToRecStartDiv, photoToRecEndDiv);
@@ -282,9 +367,7 @@ $(document).ready(function () {
     return militaryTime;
   }
 
-  // creating the start and end times for the travel times
-
-  // pass the end time in HH:MM format in militart time, and the duration in seconds
+  // pass the end time in HH:MM format in military time, and the duration in seconds
   function calcStartTime(endTime, duration) {
     var endHour = parseInt(endTime.substring(0, 2));
     var endMin = parseInt(endTime.substring(3));
@@ -296,6 +379,7 @@ $(document).ready(function () {
     return startTime;
   }
 
+  // pass the start time in HH:MM format in military time, and the duration in seconds
   function calcEndTime(startTime, duration) {
     var startHour = parseInt(startTime.substring(0, 2));
     var startMin = parseInt(startTime.substring(3));
@@ -307,7 +391,7 @@ $(document).ready(function () {
     return endTime;
   }
 
-  // call this function with the start time and end time in military time HH:MM
+  // call this function with the start time and end time in military time HH:MM. This function will add the appropriate color class to all rows between the start and end time
   function colorDivs(startTime, endTime) {
     while (startTime != endTime) {
       startTime = moment(startTime, "HH:mm");

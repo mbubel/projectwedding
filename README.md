@@ -20,9 +20,9 @@ The app uses the following APIs:
 See images below for screenshots of the app, and [here](https://mbubel.github.io/projectwedding/) is a link to use the app.
 
 ## Reference Images
-Page on Intial Load: ![Page on initial load](https://octodex.github.com/images/page-on-load.png) 
+Page on Intial Load: ![Page on initial load](octodex.github.com/images/page-on-load.png) 
 
-Page after user enters info in all submission fields: ![Page on initial load](https://octodex.github.com/images/page-after-user-submission.png) 
+Page after user enters info in all submission fields: ![Page on initial load](octodex.github.com/images/page-after-user-submission.png) 
 
 
 ## License
